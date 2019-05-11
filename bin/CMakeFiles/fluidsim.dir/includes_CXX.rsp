@@ -1,1 +1,0 @@
--IC:/OpenGLProjects/Openglprojects/fluidsim/glfw/include -IC:/GLEW/glew-2.0.0/include -IC:/OpenGLProjects/Openglprojects/fluidsim -IC:/OpenGLProjects/Openglprojects/fluidsim/../glm -IC:/MinGW/include -IC:/OpenGLProjects/Openglprojects/fluidsim/../mingwthreads -IC:/OpenGLProjects/Openglprojects/fluidsim/../shared/include 

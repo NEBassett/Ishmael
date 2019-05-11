@@ -1,1 +1,0 @@
-glfw/src/libglfw3.a C:/GLEW/glew-2.0.0/lib/libglew32.a -lopengl32 -lglu32 -Wl,-Bstatic -lboost_thread -lboost_system -Wl,-Bdynamic -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
