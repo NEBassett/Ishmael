@@ -1,0 +1,8 @@
+<simInfo>
+    <gridlen>40</gridlen>
+    <simlen>40</simlen>
+    <diffuseIterations>1</diffuseIterations>
+    <pressureIterations>20</pressureIterations>
+    <density>0.2</density>
+    <viscosity>0.1</viscosity>
+</simInfo>

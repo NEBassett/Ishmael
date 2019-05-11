@@ -1,0 +1,81 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_75f80/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_75f80.dir\build.make CMakeFiles/cmTC_75f80.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_75f80.dir/CheckIncludeFile.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_75f80.dir\CheckIncludeFile.c.obj   -c C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c:1:21: fatal error: pthread.h: No such file or directory
+ #include <pthread.h>
+                     ^
+compilation terminated.
+CMakeFiles\cmTC_75f80.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_75f80.dir/CheckIncludeFile.c.obj' failed
+mingw32-make.exe[1]: *** [CMakeFiles/cmTC_75f80.dir/CheckIncludeFile.c.obj] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Makefile:125: recipe for target 'cmTC_75f80/fast' failed
+mingw32-make.exe: *** [cmTC_75f80/fast] Error 2
+
+
+Determining if the include file dinput.h exists failed with the following output:
+Change Dir: C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_0005a/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_0005a.dir\build.make CMakeFiles/cmTC_0005a.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0005a.dir/CheckIncludeFile.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_0005a.dir\CheckIncludeFile.c.obj   -c C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c:1:20: fatal error: dinput.h: No such file or directory
+ #include <dinput.h>
+                    ^
+compilation terminated.
+CMakeFiles\cmTC_0005a.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_0005a.dir/CheckIncludeFile.c.obj' failed
+mingw32-make.exe[1]: *** [CMakeFiles/cmTC_0005a.dir/CheckIncludeFile.c.obj] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Makefile:125: recipe for target 'cmTC_0005a/fast' failed
+mingw32-make.exe: *** [cmTC_0005a/fast] Error 2
+
+
+Determining if the include file xinput.h exists failed with the following output:
+Change Dir: C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_a8722/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_a8722.dir\build.make CMakeFiles/cmTC_a8722.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a8722.dir/CheckIncludeFile.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_a8722.dir\CheckIncludeFile.c.obj   -c C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\CheckIncludeFile.c:1:20: fatal error: xinput.h: No such file or directory
+ #include <xinput.h>
+                    ^
+compilation terminated.
+CMakeFiles\cmTC_a8722.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_a8722.dir/CheckIncludeFile.c.obj' failed
+mingw32-make.exe[1]: *** [CMakeFiles/cmTC_a8722.dir/CheckIncludeFile.c.obj] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Makefile:125: recipe for target 'cmTC_a8722/fast' failed
+mingw32-make.exe: *** [cmTC_a8722/fast] Error 2
+
+
+Performing C SOURCE FILE Test _GLFW_HAS_64ASLR failed with the following output:
+Change Dir: C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_ef61c/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_ef61c.dir\build.make CMakeFiles/cmTC_ef61c.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ef61c.dir/src.c.obj
+C:\MinGW\bin\gcc.exe   -D_GLFW_HAS_64ASLR -Wl,--high-entropy-va   -o CMakeFiles\cmTC_ef61c.dir\src.c.obj   -c C:\OpenGLProjects\Openglprojects\fluidsim\bin\CMakeFiles\CMakeTmp\src.c
+Linking C executable cmTC_ef61c.exe
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_ef61c.dir\link.txt --verbose=1
+"C:\Program Files\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTC_ef61c.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\cmTC_ef61c.dir/objects.a @CMakeFiles\cmTC_ef61c.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe  -D_GLFW_HAS_64ASLR -Wl,--high-entropy-va    -Wl,--whole-archive CMakeFiles\cmTC_ef61c.dir/objects.a -Wl,--no-whole-archive  -o cmTC_ef61c.exe -Wl,--out-implib,libcmTC_ef61c.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_ef61c.dir\linklibs.rsp
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: unrecognized option '--high-entropy-va'
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: use the --help option for usage information
+collect2.exe: error: ld returned 1 exit status
+CMakeFiles\cmTC_ef61c.dir\build.make:98: recipe for target 'cmTC_ef61c.exe' failed
+mingw32-make.exe[1]: *** [cmTC_ef61c.exe] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/OpenGLProjects/Openglprojects/fluidsim/bin/CMakeFiles/CMakeTmp'
+Makefile:125: recipe for target 'cmTC_ef61c/fast' failed
+mingw32-make.exe: *** [cmTC_ef61c/fast] Error 2
+
+Source file was:
+int main(void) { return 0; }
