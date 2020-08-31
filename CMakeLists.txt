@@ -3,7 +3,7 @@ project (fluidsim)
 
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(Boost 1.67.0 COMPONENTS thread system)
+find_package(Boost COMPONENTS thread system)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 add_executable (fluidsim "${PROJECT_SOURCE_DIR}/src/main.cpp")

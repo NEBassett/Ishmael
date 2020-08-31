@@ -153,6 +153,16 @@ class fluidSim
     )
   );
 
+  using injectType = decltype(
+    GLDSEL::make_program_from_paths(
+      boost::hana::make_tuple("", ""),
+      glDselUniform("dim", int),
+      glDselUniform("tdelta", float),
+      glDselUniform("old", int),
+      glDselUniform("fluid", int)
+    )
+  );
+
   using divergenceType = decltype(
     GLDSEL::make_program_from_paths(
       boost::hana::make_tuple("", ""),
@@ -192,6 +202,7 @@ class fluidSim
   projectType projectionProgram_;
   boundaryType boundaryProgram_;
   texclearType texclearProgram_;
+  injectType injectFluidProgram_;
   GLuint intermediate_;
   GLuint intermediateDiv_;
   GLuint intermediateFluid_;
@@ -234,6 +245,26 @@ class fluidSim
     std::swap(quantity, intermed);
   }
 
+  auto injectDye(float timeDelta)
+  {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_3D, fluid_);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_3D, fluid_);
+    glBindImageTexture(0, intermediateFluid_, 0, GL_TRUE, 0, GL_WRITE_ONLY, GL_RGBA32F);
+
+    injectFluidProgram_.setUniforms(
+      glDselArgument("dim", info_.gridlen),
+      glDselArgument("tdelta", timeDelta),
+      glDselArgument("old", 0),
+      glDselArgument("fluid", 1)
+    );
+
+    glDispatchCompute(info_.gridlen, info_.gridlen, info_.gridlen);
+
+    std::swap(fluid_, intermediateFluid_); // swap handles
+  }
+
   auto force(float timeDelta)
   {
     glActiveTexture(GL_TEXTURE0);
@@ -262,7 +293,7 @@ class fluidSim
 
     boundaryProgram_.setUniforms(
       glDselArgument("dim", info_.gridlen),
-      glDselArgument("scale", 0.0f)
+      glDselArgument("scale", 1.0005f)
     );
 
     glDispatchCompute(info_.gridlen, info_.gridlen, info_.gridlen);
@@ -304,12 +335,6 @@ class fluidSim
 
   auto projection()
   {
-    static auto diffprog = GLDSEL::make_program_from_paths(
-        boost::hana::make_tuple(boost::none,boost::none,boost::none,boost::none,boost::none, "../src/difference/main.cs"),
-        glDselUniform("dim", int),
-        glDselUniform("delta", float)
-    );
-
     velocityBoundary();
 
     glActiveTexture(GL_TEXTURE0);
@@ -411,8 +436,10 @@ class fluidSim
       glDselArgument("old", 0)
     );
 
+    jacobiProgram_.activate();
     for(auto i = size_t{0}; i < info_.diffuseIterations; i++)
     {
+      glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_3D, velocity_);
       glBindImageTexture(1, intermediate_, 0, GL_TRUE, 0, GL_WRITE_ONLY, GL_RGBA32F);
       glBindImageTexture(2, velocity_, 0, GL_TRUE, 0, GL_READ_ONLY, GL_RGBA32F);
@@ -481,6 +508,15 @@ public:
          glDselUniform("dim", int)
      )
    ),
+   injectFluidProgram_(
+     GLDSEL::make_program_from_paths(
+       boost::hana::make_tuple(boost::none,boost::none,boost::none,boost::none,boost::none, "../src/injectDye/main.cs"),
+       glDselUniform("dim", int),
+       glDselUniform("tdelta", float),
+       glDselUniform("old", int),
+       glDselUniform("fluid", int)
+     )
+   ),
    intermediate_(0),
    intermediateDiv_(0),
    intermediateFluid_(0),
@@ -530,10 +566,10 @@ public:
     fluid_ = newVolume([this](const auto x, const auto y, const auto z)
     {
       auto retval = glm::vec4(0.0);
-      if(y > info_.gridlen/2 && ((x != 0) &&( x != info_.gridlen-1) && (y != 0) && (y != info_.gridlen-1) && (y != info_.gridlen-2) && (z != 0) && (z != info_.gridlen-1)))
-      {
-        retval = retval + glm::vec4(1.0); // some at the ceiling, none beyond boundary of course
-      }
+      //if(y > info_.gridlen/2 && ((x != 0) &&( x != info_.gridlen-1) && (y != 0) && (y != info_.gridlen-1) && (y != info_.gridlen-2) && (z != 0) && (z != info_.gridlen-1)))
+      //{
+        //retval = retval + glm::vec4(1.0); // some at the ceiling, none beyond boundary of course
+      //}
       return retval;
     });
     intermediateFluid_ = newVolume([](const auto &...){return glm::vec4();});
@@ -551,16 +587,21 @@ public:
 
   auto step(float timeDelta)
   {
+    injectDye(timeDelta);
     velocityBoundary();
     fluidBoundary();
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
     advect(timeDelta, fluid_, intermediateFluid_);
+    fluidBoundary();
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
     advect(timeDelta, velocity_, intermediate_);
+    velocityBoundary();
+    fluidBoundary();
+    glMemoryBarrier(GL_ALL_BARRIER_BITS);
+    diffuse(timeDelta);
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
     force(timeDelta);
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
-    //diffuse(timeDelta);
     projection();
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -616,7 +657,7 @@ int main()
   // gl init
   glEnable(GL_DEBUG_OUTPUT);
   glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-  glPointSize(15.5f);
+  glPointSize(30.0f);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDebugMessageCallback(msgCallback, 0);

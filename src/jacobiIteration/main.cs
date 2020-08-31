@@ -17,11 +17,11 @@ void main()
   float texel = 1.0/dim;
 
   imageStore(new, index, vec4(
-    texture(old, fInd + vec3(texel,0,0)).x +
-    texture(old, fInd + vec3(-texel,0,0)).x +
-    texture(old, fInd + vec3(0,texel,0)).x +
-    texture(old, fInd + vec3(0,-texel,0)).x +
-    texture(old, fInd + vec3(0,0,texel)).x +
-    texture(old, fInd + vec3(0,0,-texel)).x +
-    alpha*imageLoad(poissonTarget, index).x)/beta);
+    texture(old, fInd + vec3(texel,0,0)) +
+    texture(old, fInd + vec3(-texel,0,0)) +
+    texture(old, fInd + vec3(0,texel,0)) +
+    texture(old, fInd + vec3(0,-texel,0)) +
+    texture(old, fInd + vec3(0,0,texel)) +
+    texture(old, fInd + vec3(0,0,-texel)) +
+    alpha*imageLoad(poissonTarget, index))/beta);
 }
